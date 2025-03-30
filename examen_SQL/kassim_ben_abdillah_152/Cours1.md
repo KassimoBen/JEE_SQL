@@ -2,28 +2,9 @@
 
 # Cours Bases de Données - 2ᵍᵀᴹ Année IUT
 
-## 📖 Cours 1 : Vues et Index
+##  Cours 1 : Vues et Index
 
-👩‍🏫 **Anne Vilnat**  
-🔗 [Cours en ligne](http://www.limsi.fr/Individu/anne/cours)
-
----
-
-## Plan
-
-1. **Les Vues**
-   - 🔹 Généralités
-   - 🔹 Syntaxe
-   - 🔹 Avantages
-   - 🔹 Conditions de mise à jour
-2. **Index**
-   - 🔹 Généralités
-   - 🔹 Syntaxe
-   - 🔹 Organisation
-
----
-
-## 🔎 Définition
+##  Définition
 
 Une **vue** est une table virtuelle, résultat d’une requête à laquelle on a donné un **nom**.
 

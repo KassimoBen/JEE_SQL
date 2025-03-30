@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Cours Bases de Donn&eacute;es - 2&#x1d4d;&#x1d40;&#x1d39; Ann&eacute;e IUT</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <p>##Les Vues : Définition et Intérêt##Voici votre document converti en Markdown avec du style pour une meilleure lisibilité :</p>
+<h1 id="cours-bases-de-données---2ᵍᵀᴹ-année-iut">Cours Bases de Données - 2ᵍᵀᴹ Année IUT</h1>
+<h2 id="cours-1--vues-et-index">Cours 1 : Vues et Index</h2>
+<h2 id="définition">Définition</h2>
+<p>Une <strong>vue</strong> est une table virtuelle, résultat d’une requête à laquelle on a donné un <strong>nom</strong>.</p>
+<h3 id="pourquoi-utiliser-une-vue-">Pourquoi utiliser une Vue ?</h3>
+<p><strong>Simplifie</strong> des requêtes complexes<br>
+<strong>Améliore</strong> la confidentialité des données<br>
+<strong>Garantit</strong> l’intégrité d’une base</p>
+<hr>
+<h2 id="création-dune-vue">Création d’une Vue</h2>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> [<span class="hljs-keyword">OR</span> REPLACE] [FORCE <span class="hljs-operator">|</span> NOFORCE] <span class="hljs-keyword">VIEW</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span> [(<span class="hljs-operator">&lt;</span>liste_attributs<span class="hljs-operator">&gt;</span>)]
+<span class="hljs-keyword">AS</span> <span class="hljs-operator">&lt;</span>clause_select<span class="hljs-operator">&gt;</span>
+[<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">CHECK</span> OPTION [<span class="hljs-keyword">CONSTRAINT</span> <span class="hljs-operator">&lt;</span>nom_de_contrainte<span class="hljs-operator">&gt;</span>]]
+[<span class="hljs-keyword">WITH</span> READ <span class="hljs-keyword">ONLY</span>];
+
+###  Utilisation
+
+```<span class="hljs-keyword">sql</span>
+<span class="hljs-keyword">SELECT</span> ... <span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">WHERE</span> ...
+</code></pre>
+<p><strong>Remarque :</strong> Une vue peut être utilisée dans <code>SELECT, UPDATE, DELETE, INSERT, GRANT</code>.</p>
+<h3 id="exemple">Exemple</h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> CritiquesLeMonde <span class="hljs-keyword">AS</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Critique <span class="hljs-keyword">WHERE</span> Source<span class="hljs-operator">=</span><span class="hljs-string">&#x27;Le Monde&#x27;</span>;
+</code></pre>
+<h3 id="suppression-et-renommage">Suppression et Renommage</h3>
+<pre><code class="language-sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">VIEW</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span>;
+RENAME <span class="hljs-operator">&lt;</span>ancien_nom_de_vue<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>nouveau_nom_de_vue<span class="hljs-operator">&gt;</span>;
+</code></pre>
+<p><strong>Remarque :</strong> Supprimer une vue ne supprime pas les données.</p>
+<h3 id="exemple--vue-pour-simplifier-une-requête-complexe">Exemple : Vue pour simplifier une requête complexe</h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> FilmCritique (NumFilm, Titre, NomReal, NomCrit, Note) <span class="hljs-keyword">AS</span>
+<span class="hljs-keyword">SELECT</span> F.NumFilm, Titre, I1.NomIndividu, I2.NomIndividu, Note
+<span class="hljs-keyword">FROM</span> Film F, Individu I1, Individu I2, Critique C
+<span class="hljs-keyword">WHERE</span> C.NumFilm <span class="hljs-operator">=</span> F.NumFilm
+<span class="hljs-keyword">AND</span> C.NumIndividu <span class="hljs-operator">=</span> I2.NumIndividu
+<span class="hljs-keyword">AND</span> F.NumRealisateur <span class="hljs-operator">=</span> I1.NumIndividu;
+</code></pre>
+<h3 id="vue-pour-assurer-la-confidentialité">Vue pour assurer la confidentialité</h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> IndividuPublic <span class="hljs-keyword">AS</span>
+<span class="hljs-keyword">SELECT</span> NumIndividu, NomIndividu, PrenomIndividu
+<span class="hljs-keyword">FROM</span> INDIVIDU;
+</code></pre>
+<h3 id="vue-pour-assurer-lintégrité">Vue pour assurer l’intégrité</h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> CritiqueSansAvis <span class="hljs-keyword">AS</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Critique
+<span class="hljs-keyword">WHERE</span> Texte <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;
+</code></pre>
+<p>➡️ <strong>Mise à jour</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">UPDATE</span> CritiqueSansAvis
+<span class="hljs-keyword">SET</span> Texte <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Sans intérêt&#x27;</span>
+<span class="hljs-keyword">WHERE</span> Note <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+</code></pre>
+<hr>
+<h2 id="index--généralités">Index : Généralités</h2>
+<h3 id="pourquoi-utiliser-un-index-">Pourquoi utiliser un index ?</h3>
+<p><strong>Optimise</strong> l’accès aux données<br>
+<strong>Assure</strong> l’unicité (clé primaire, contraintes explicites)</p>
+<h3 id="création-dun-index">Création d’un Index</h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> [<span class="hljs-keyword">UNIQUE</span> <span class="hljs-operator">|</span> BITMAP] INDEX [<span class="hljs-operator">&lt;</span>schema<span class="hljs-operator">&gt;</span>.]<span class="hljs-operator">&lt;</span>nom_index<span class="hljs-operator">&gt;</span>
+<span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>nom_de_table<span class="hljs-operator">&gt;</span> (<span class="hljs-operator">&lt;</span>nom_de_colonne<span class="hljs-operator">&gt;</span> [<span class="hljs-keyword">ASC</span> <span class="hljs-operator">|</span> <span class="hljs-keyword">DESC</span>], ...);
+</code></pre>
+<p><strong>Exemple</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX IndNomIndividu
+<span class="hljs-keyword">ON</span> Individu(nomIndividu);
+</code></pre>
+<h3 id="organisation-des-index">Organisation des Index</h3>
+<h4 id="types-dindex-dans-oracle-">Types d’index dans Oracle :</h4>
+<ul>
+<li><strong>B-arbre</strong> : Toutes les branches ont la même longueur.</li>
+<li><strong>Bitmap</strong> : Utile si peu de valeurs distinctes.</li>
+</ul>
+<p><strong>Exemple d’index en B-arbre</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX IndFilmTitre <span class="hljs-keyword">ON</span> Film(Titre);
+</code></pre>
+<p><strong>Exemple d’index en Bitmap</strong> :</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> BITMAP INDEX IndClasse <span class="hljs-keyword">ON</span> Eleve(numClasse);
+</code></pre>
+<hr>
+<p><strong>Résumé</strong><br>
+Ce cours présente les <strong>vues</strong> et <strong>index</strong> en bases de données, leurs <strong>bénéfices</strong>, <strong>syntaxe</strong>, et des <strong>exemples concrets</strong> en</p>
+
+            
+            
+        </body>
+        </html>
