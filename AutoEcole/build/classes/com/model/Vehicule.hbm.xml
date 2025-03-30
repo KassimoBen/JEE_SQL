@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 f?vr. 2015 11:00:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.model.Vehicule" table="vehicule" catalog="auto_ecole">
+        <id name="numv" type="int">
+            <column name="numv" />
+            <generator class="identity" />
+        </id>
+        <property name="immatriculation" type="string">
+            <column name="immatriculation" length="9" />
+        </property>
+        <property name="modele" type="string">
+            <column name="modele" length="30" />
+        </property>
+    </class>
+</hibernate-mapping>

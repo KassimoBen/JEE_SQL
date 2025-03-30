@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 f?vr. 2015 11:00:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.model.Seance" table="seance" catalog="auto_ecole">
+        <composite-id name="id" class="com.model.SeanceId">
+            <key-property name="dates" type="date">
+                <column name="dates" length="10" />
+            </key-property>
+            <key-property name="heures" type="int">
+                <column name="heures" />
+            </key-property>
+        </composite-id>
+        <property name="nums" type="java.lang.Integer">
+            <column name="nums" />
+        </property>
+        <property name="numcd" type="java.lang.Integer">
+            <column name="numcd" />
+        </property>
+    </class>
+</hibernate-mapping>

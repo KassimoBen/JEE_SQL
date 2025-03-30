@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 f?vr. 2015 11:00:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.model.Assiste" table="assiste" catalog="auto_ecole">
+        <composite-id name="id" class="com.model.AssisteId">
+            <key-property name="nume" type="int">
+                <column name="nume" />
+            </key-property>
+            <key-property name="datea" type="date">
+                <column name="datea" length="10" />
+            </key-property>
+            <key-property name="heurea" type="int">
+                <column name="heurea" />
+            </key-property>
+        </composite-id>
+        <property name="nbfautes" type="java.lang.Integer">
+            <column name="nbfautes" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 f?vr. 2015 11:00:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.model.Lecon" table="lecon" catalog="auto_ecole">
+        <id name="numl" type="int">
+            <column name="numl" />
+            <generator class="assigned" />
+        </id>
+        <property name="dateCours" type="date">
+            <column name="date_cours" length="10" />
+        </property>
+        <property name="heureDebut" type="time">
+            <column name="heure_debut" length="8" />
+        </property>
+        <property name="duree" type="java.lang.Integer">
+            <column name="duree" />
+        </property>
+        <property name="nume" type="java.lang.Integer">
+            <column name="nume" />
+        </property>
+        <property name="numm" type="java.lang.Integer">
+            <column name="numm" />
+        </property>
+        <property name="numv" type="java.lang.Integer">
+            <column name="numv" />
+        </property>
+    </class>
+</hibernate-mapping>

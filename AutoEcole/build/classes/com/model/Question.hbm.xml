@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 f?vr. 2015 11:00:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.model.Question" table="question" catalog="auto_ecole">
+        <id name="numq" type="java.lang.Integer">
+            <column name="numq" />
+            <generator class="identity" />
+        </id>
+        <property name="intitule" type="string">
+            <column name="intitule" length="200" unique="true" />
+        </property>
+        <property name="reponse" type="string">
+            <column name="reponse" length="4" />
+        </property>
+        <property name="diffic" type="java.lang.Integer">
+            <column name="diffic" />
+        </property>
+        <property name="theme" type="string">
+            <column name="theme" length="25" />
+        </property>
+    </class>
+</hibernate-mapping>

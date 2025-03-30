@@ -1,0 +1,41 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/auto_ecole</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password"></property>
+
+        <!-- JDBC connection pool -->
+        <property name="connection.pool_size">5</property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Disable second-level cache -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+
+        <!-- Show executed SQL -->
+        <property name="show_sql">true</property>
+
+        <!-- Hibernate DDL Auto -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Mapping files -->
+        <mapping resource="com/model/Eleve.hbm.xml" />
+        <mapping resource="com/model/Moniteur.hbm.xml" />
+        <mapping resource="com/model/Vehicule.hbm.xml" />
+        <mapping resource="com/model/Cd.hbm.xml" />
+        <mapping resource="com/model/Lecon.hbm.xml" />
+        <mapping resource="com/model/Examen.hbm.xml" />
+        <mapping resource="com/model/Question.hbm.xml" />
+        <mapping resource="com/model/Serie.hbm.xml" />
+        <mapping resource="com/model/Seance.hbm.xml" />
+        <mapping resource="com/model/Appartient.hbm.xml" />
+        <mapping resource="com/model/Inscrit.hbm.xml" />
+        <mapping resource="com/model/Assiste.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

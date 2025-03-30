@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 f?vr. 2015 11:00:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.model.Examen" table="examen" catalog="auto_ecole">
+        <composite-id name="id" class="com.model.ExamenId">
+            <key-property name="datee" type="date">
+                <column name="datee" length="10" />
+            </key-property>
+            <key-property name="heuree" type="int">
+                <column name="heuree" />
+            </key-property>
+        </composite-id>
+        <property name="typee" type="string">
+            <column name="typee" length="25" />
+        </property>
+        <property name="resultate" type="string">
+            <column name="resultate" length="25" />
+        </property>
+    </class>
+</hibernate-mapping>
