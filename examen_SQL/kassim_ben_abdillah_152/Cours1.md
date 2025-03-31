@@ -1,73 +1,72 @@
-##Les Vues : Définition et Intérêt##Voici votre document converti en Markdown avec du style pour une meilleure lisibilité :  
+# **Vues et Index**  
 
-# Cours Bases de Données - 2ᵍᵀᴹ Année IUT
+## **Définition**  
 
-##  Cours 1 : Vues et Index
+Une **vue** est une table virtuelle issue du résultat d’une requête, qui est stockée sous un **nom spécifique**. Elle permet de simplifier des requêtes complexes, d’améliorer la confidentialité des données et de garantir l’intégrité d’une base de données.  
 
-##  Définition
+## **Pourquoi utiliser une Vue ?**
+**Simplifier** des requêtes complexes et améliorer la lisibilité du code SQL
 
-Une **vue** est une table virtuelle, résultat d’une requête à laquelle on a donné un **nom**.
+**Restreindre** l’accès aux données sensibles en affichant uniquement les colonnes nécessaires
 
-### Pourquoi utiliser une Vue ?
+**Faciliter** la maintenance des requêtes SQL en centralisant la logique
 
-**Simplifie** des requêtes complexes  
-**Améliore** la confidentialité des données  
- **Garantit** l’intégrité d’une base  
+**Optimiser** l’accès aux données dans certaines situations
 
----
-
-## Création d’une Vue
+## **Création d’une Vue**  
 
 ```sql
 CREATE [OR REPLACE] [FORCE | NOFORCE] VIEW <nom_de_vue> [(<liste_attributs>)]
 AS <clause_select>
 [WITH CHECK OPTION [CONSTRAINT <nom_de_contrainte>]]
 [WITH READ ONLY];
-
-###  Utilisation
-
-```sql
-SELECT ... FROM <nom_de_vue> WHERE ...
 ```
 
-**Remarque :** Une vue peut être utilisée dans `SELECT, UPDATE, DELETE, INSERT, GRANT`.
+### **Utilisation d’une Vue**  
 
-### Exemple
+```sql
+SELECT * FROM <nom_de_vue> WHERE ...;
+```
+
+**Remarque :** Une vue peut être utilisée dans `SELECT, UPDATE, DELETE, INSERT, GRANT`, sous certaines conditions.
+
+---
+
+## **Exemples de Vues**  
+
+### **Vue pour filtrer des données spécifiques**  
 
 ```sql
 CREATE VIEW CritiquesLeMonde AS
-SELECT * FROM Critique WHERE Source='Le Monde';
+SELECT * FROM Critique WHERE Source = 'Le Monde';
 ```
 
-### Suppression et Renommage
+---
+
+### **Vue pour simplifier une requête complexe**  
 
 ```sql
-DROP VIEW <nom_de_vue>;
-RENAME <ancien_nom_de_vue> TO <nouveau_nom_de_vue>;
+CREATE VIEW FilmCritique (NumFilm, Titre, NomRealisateur, NomCritique, Note) AS
+SELECT F.NumFilm, F.Titre, I1.NomIndividu AS Realisateur, I2.NomIndividu AS Critique, C.Note
+FROM Film F
+JOIN Individu I1 ON F.NumRealisateur = I1.NumIndividu
+JOIN Critique C ON C.NumFilm = F.NumFilm
+JOIN Individu I2 ON C.NumIndividu = I2.NumIndividu;
 ```
 
- **Remarque :** Supprimer une vue ne supprime pas les données.
+---
 
-### Exemple : Vue pour simplifier une requête complexe
-
-```sql
-CREATE VIEW FilmCritique (NumFilm, Titre, NomReal, NomCrit, Note) AS
-SELECT F.NumFilm, Titre, I1.NomIndividu, I2.NomIndividu, Note
-FROM Film F, Individu I1, Individu I2, Critique C
-WHERE C.NumFilm = F.NumFilm
-AND C.NumIndividu = I2.NumIndividu
-AND F.NumRealisateur = I1.NumIndividu;
-```
-
-### Vue pour assurer la confidentialité
+### **Vue pour restreindre l’accès aux données sensibles**  
 
 ```sql
 CREATE VIEW IndividuPublic AS
 SELECT NumIndividu, NomIndividu, PrenomIndividu
-FROM INDIVIDU;
+FROM Individu;
 ```
 
-### Vue pour assurer l’intégrité
+---
+
+### **Vue pour assurer l’intégrité des données**  
 
 ```sql
 CREATE VIEW CritiqueSansAvis AS
@@ -75,7 +74,7 @@ SELECT * FROM Critique
 WHERE Texte IS NULL;
 ```
 
-➡️ **Mise à jour** :
+#### **Mise à jour à travers la Vue**  
 
 ```sql
 UPDATE CritiqueSansAvis
@@ -85,47 +84,76 @@ WHERE Note = 0;
 
 ---
 
-## Index : Généralités
+## **Suppression et Renommage d’une Vue**  
 
-### Pourquoi utiliser un index ?
+```sql
+DROP VIEW <nom_de_vue>;
+RENAME <ancien_nom_de_vue> TO <nouveau_nom_de_vue>;
+```
 
-**Optimise** l’accès aux données  
-**Assure** l’unicité (clé primaire, contraintes explicites)  
+---
 
-### Création d’un Index
+# **Les Index en SQL**  
+
+## **Pourquoi utiliser un index ?**  
+
+**Accélère** les performances des requêtes sur de grandes tables  
+**Améliore** l’efficacité des recherches avec `WHERE`, `ORDER BY`, et `JOIN`  
+**Assure** l’unicité des enregistrements (exemple : clé primaire)  
+
+---
+
+## **Création d’un Index**  
 
 ```sql
 CREATE [UNIQUE | BITMAP] INDEX [<schema>.]<nom_index>
 ON <nom_de_table> (<nom_de_colonne> [ASC | DESC], ...);
 ```
 
-**Exemple** :
+### **Exemple : Index classique pour accélérer les recherches**  
 
 ```sql
 CREATE INDEX IndNomIndividu
-ON Individu(nomIndividu);
+ON Individu(NomIndividu);
 ```
 
-### Organisation des Index
+---
 
-#### Types d’index dans Oracle :
+### **Index pour optimiser les recherches par clé étrangère**  
 
-- **B-arbre** : Toutes les branches ont la même longueur.
-- **Bitmap** : Utile si peu de valeurs distinctes.
+```sql
+CREATE INDEX IndCritiqueFilm
+ON Critique(NumFilm);
+```
 
-**Exemple d’index en B-arbre** :
+---
+
+### **Index Unique pour assurer l’unicité d’une colonne**  
+
+```sql
+CREATE UNIQUE INDEX IndNumIndividu
+ON Individu(NumIndividu);
+```
+
+---
+
+## **Types d’Index dans Oracle**  
+
+- **B-tree (B-arbre)** : Arbre équilibré où chaque branche a la même profondeur  
+- **Bitmap** : Utilisé pour les colonnes avec peu de valeurs distinctes  
+
+### **Exemple d’Index en B-arbre**  
 
 ```sql
 CREATE INDEX IndFilmTitre ON Film(Titre);
 ```
 
-**Exemple d’index en Bitmap** :
+---
+
+### **Exemple d’Index en Bitmap**  
 
 ```sql
 CREATE BITMAP INDEX IndClasse ON Eleve(numClasse);
 ```
 
 ---
-
-**Résumé**  
-Ce cours présente les **vues** et **index** en bases de données, leurs **bénéfices**, **syntaxe**, et des **exemples concrets** en 

@@ -2,7 +2,7 @@
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>INDEX</title>
+            <title>&ast;&ast;1&period; Qu&CloseCurlyQuote;est-ce qu&CloseCurlyQuote;un INDEX &quest;&ast;&ast;</title>
             <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -138,138 +138,100 @@
         
         </head>
         <body class="vscode-body vscode-light">
-            <h1 id="index">INDEX</h1>
-<h2 id="quest-ce-quun-index-">Qu’est-ce qu’un INDEX ?</h2>
-<p>Un <strong>index</strong> est un objet physique utilisé pour <strong>accélérer l’accès aux données</strong> en facilitant l’exécution des requêtes sur une table. Il agit comme un guide permettant de localiser rapidement les informations sans parcourir l’ensemble des données.</p>
-<h2 id="création-dun-index">Création d’un INDEX</h2>
-<p>Un index peut être créé à l’aide de la commande suivante :</p>
+            <p>Voici un résumé avec des exemples SQL pour comprendre les concepts des <strong>INDEX en SQL</strong> :</p>
+<hr>
+<h3 id="1-quest-ce-quun-index-"><strong>1. Qu’est-ce qu’un INDEX ?</strong></h3>
+<p>Un <strong>index</strong> est un objet utilisé pour accélérer l'accès aux données dans une table, en réduisant le temps de recherche.</p>
+<hr>
+<h3 id="2-création-dun-index"><strong>2. Création d’un INDEX</strong></h3>
+<p>La syntaxe pour créer un index est la suivante :</p>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX index_name <span class="hljs-keyword">ON</span> table_name(column_name);
 </code></pre>
 <p><strong>Exemple :</strong></p>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX user_id <span class="hljs-keyword">ON</span> <span class="hljs-keyword">user</span>(id);
 </code></pre>
-<h2 id="utilité-dun-index">Utilité d’un INDEX</h2>
-<h3 id="test-avant-la-création-de-lindex-">Test avant la création de l’index :</h3>
+<hr>
+<h3 id="3-utilité-dun-index"><strong>3. Utilité d’un INDEX</strong></h3>
+<p><strong>Avant la création de l'index :</strong></p>
 <pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;
-<span class="hljs-comment">-- Temps de réponse : 1760,017 ms</span>
+<span class="hljs-comment">-- Temps de réponse : 1760 ms</span>
 </code></pre>
-<h3 id="test-après-la-création-de-lindex-">Test après la création de l’index :</h3>
+<p><strong>Après la création de l'index :</strong></p>
 <pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;
-<span class="hljs-comment">-- Temps de réponse : 27,711 ms</span>
+<span class="hljs-comment">-- Temps de réponse : 27 ms</span>
 </code></pre>
-<p><strong>Résultat :</strong> Le temps de réponse est considérablement réduit après la création de l’index.</p>
-<h2 id="inconvénients-des-index">Inconvénients des INDEX</h2>
-<p>Malgré leurs avantages, les index présentent certains inconvénients :</p>
-<ul>
-<li>Ils <strong>ralentissent les opérations d’écriture</strong> (INSERT, UPDATE, DELETE).</li>
-<li>Ils <strong>consomment de la mémoire supplémentaire</strong>.</li>
-<li>Ils peuvent <strong>dégrader les performances</strong> dans certains cas, notamment lors d’importants volumes d’insertion.</li>
-</ul>
-<h3 id="exemple-dimpact-sur-les-performances-dinsertion">Exemple d’impact sur les performances d’insertion</h3>
-<p>La fonction <code>generate_series(min, max)</code> permet de générer une liste de nombres entre <code>min</code> et <code>max</code>.</p>
-<h4 id="insertion-sans-index-">Insertion sans index :</h4>
-<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> test3 (
-    id <span class="hljs-type">INTEGER</span> GENERATED <span class="hljs-keyword">BY</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">AS</span> <span class="hljs-keyword">IDENTITY</span> <span class="hljs-keyword">PRIMARY</span> KEY,
-    valeur <span class="hljs-type">INTEGER</span>,
-    commentaire TEXT
-);
-<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> test3 (valeur, commentaire)
-<span class="hljs-keyword">SELECT</span> i, <span class="hljs-string">&#x27;commentaire &#x27;</span> <span class="hljs-operator">||</span> i <span class="hljs-keyword">FROM</span> generate_series(<span class="hljs-number">1</span>, <span class="hljs-number">10000000</span>) i;
-<span class="hljs-comment">-- Durée : 14 758,503 ms (00:14,759)</span>
+<hr>
+<h3 id="4-inconvénients-des-index"><strong>4. Inconvénients des INDEX</strong></h3>
+<p>Les index ralentissent les écritures comme <strong>INSERT, UPDATE, DELETE</strong> et consomment de la mémoire.</p>
+<p><strong>Insertion sans index :</strong></p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> test3 (id <span class="hljs-type">INTEGER</span> <span class="hljs-keyword">PRIMARY</span> KEY, valeur <span class="hljs-type">INTEGER</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> test3 (valeur) <span class="hljs-keyword">SELECT</span> i <span class="hljs-keyword">FROM</span> generate_series(<span class="hljs-number">1</span>, <span class="hljs-number">10000000</span>) i;
+<span class="hljs-comment">-- Durée : 14,758 ms</span>
 </code></pre>
-<h4 id="insertion-avec-index-">Insertion avec index :</h4>
-<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX idx_test2_commentaire <span class="hljs-keyword">ON</span> test2 (commentaire);
-<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> test2 (valeur, commentaire)
-<span class="hljs-keyword">SELECT</span> i, <span class="hljs-string">&#x27;commentaire &#x27;</span> <span class="hljs-operator">||</span> i <span class="hljs-keyword">FROM</span> generate_series(<span class="hljs-number">1</span>, <span class="hljs-number">10000000</span>) i;
-<span class="hljs-comment">-- Durée : 207 075,335 ms (03:27,075)</span>
+<p><strong>Insertion avec index :</strong></p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX idx_test3_valeur <span class="hljs-keyword">ON</span> test3(valeur);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> test3 (valeur) <span class="hljs-keyword">SELECT</span> i <span class="hljs-keyword">FROM</span> generate_series(<span class="hljs-number">1</span>, <span class="hljs-number">10000000</span>) i;
+<span class="hljs-comment">-- Durée : 207,075 ms</span>
 </code></pre>
-<p><strong>Conclusion :</strong> L’ajout d’un index peut <strong>ralentir considérablement les insertions massives</strong>.</p>
-<h2 id="impact-mémoire">Impact mémoire</h2>
-<p>Un index augmente la consommation d’espace disque :</p>
+<hr>
+<h3 id="5-impact-mémoire"><strong>5. Impact mémoire</strong></h3>
+<p>Les index consomment de l'espace disque :</p>
 <pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> pg_size_pretty(pg_relation_size(<span class="hljs-string">&#x27;test2&#x27;</span>)) <span class="hljs-keyword">AS</span> &quot;Taille Table&quot;,
        pg_size_pretty(pg_indexes_size(<span class="hljs-string">&#x27;test2&#x27;</span>)) <span class="hljs-keyword">AS</span> &quot;Taille Index&quot;;
-
-<span class="hljs-comment">-- Taille Table | Taille Index</span>
-<span class="hljs-comment">-- ------------+-------------</span>
-<span class="hljs-comment">-- 574 MB      | 816 MB</span>
 </code></pre>
-<p><strong>Observation :</strong> La taille occupée par les index peut dépasser celle de la table elle-même.</p>
-<h2 id="contraintes-pratiques-liées-aux-index">Contraintes pratiques liées aux INDEX</h2>
-<p>La création d’un index peut <strong>bloquer temporairement les écritures</strong> :</p>
-<pre><code class="language-sql"><span class="hljs-comment">-- Bloque les écritures</span>
-<span class="hljs-keyword">CREATE</span> INDEX <span class="hljs-keyword">ON</span> matable (macolonne);
-
-<span class="hljs-comment">-- Ne bloque pas mais plus lent et risque d’échec</span>
-<span class="hljs-keyword">CREATE</span> INDEX CONCURRENTLY <span class="hljs-keyword">ON</span> matable (macolonne);
+<hr>
+<h3 id="6-contraintes-pratiques-liées-aux-index"><strong>6. Contraintes pratiques liées aux INDEX</strong></h3>
+<p>La création d'un index peut <strong>bloquer temporairement les écritures</strong>.</p>
+<p><strong>Création bloquante :</strong></p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX <span class="hljs-keyword">ON</span> matable (macolonne);
 </code></pre>
-<h2 id="réindexation">Réindexation</h2>
-<p>La réindexation permet de reconstruire les index pour optimiser les performances :</p>
-<pre><code class="language-sql">REINDEX INDEX pgbench_accounts_bid_idx;  <span class="hljs-comment">-- Un seul index</span>
+<p><strong>Création non-bloquante :</strong></p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX CONCURRENTLY <span class="hljs-keyword">ON</span> matable (macolonne);
+</code></pre>
+<hr>
+<h3 id="7-réindexation"><strong>7. Réindexation</strong></h3>
+<pre><code class="language-sql">REINDEX INDEX pgbench_accounts_bid_idx; <span class="hljs-comment">-- Un seul index</span>
 REINDEX <span class="hljs-keyword">TABLE</span> pgbench_accounts;          <span class="hljs-comment">-- Tous les index d&#x27;une table</span>
-REINDEX (VERBOSE) DATABASE pgbench;      <span class="hljs-comment">-- Tous les index de la base avec détails</span>
+REINDEX DATABASE pgbench;                <span class="hljs-comment">-- Tous les index de la base</span>
 </code></pre>
-<h2 id="types-dindex-dans-postgresql">Types d’INDEX dans PostgreSQL</h2>
+<hr>
+<h3 id="8-types-dindex-dans-postgresql"><strong>8. Types d’INDEX dans PostgreSQL</strong></h3>
 <ul>
-<li><strong>B-tree</strong> (équilibré) : type par défaut.</li>
-<li><strong>UNIQUE</strong> : garantit l’unicité des valeurs.</li>
-<li><strong>Multicolonne, fonctionnel, partiel, couvrant.</strong></li>
-<li><strong>Index spécialisés</strong> : Hash, GiST, GIN, BRIN, HNSW, etc.</li>
+<li><strong>B-tree</strong> : Par défaut.</li>
+<li><strong>UNIQUE</strong> : Garantit l'unicité.</li>
+<li><strong>Multicolonne, fonctionnel, partiel, couvrant</strong>.</li>
+<li><strong>Index spécialisés</strong> : Hash, GiST, GIN, BRIN.</li>
 </ul>
-<h2 id="structure-dun-index">Structure d’un INDEX</h2>
-<p>Un index associe des <strong>clés</strong> à des <strong>localisations</strong> (pages mémoire) à l’aide d’une structure distincte de la table.</p>
-<p><strong>Analogie :</strong></p>
-<ul>
-<li>Fiches en carton dans une bibliothèque : <strong>B-tree</strong></li>
-<li>Index à la fin d’un livre technique : <strong>GIN</strong></li>
-</ul>
-<h2 id="index-multicolonne">Index multicolonne</h2>
-<p>Il est possible d’indexer plusieurs colonnes :</p>
+<hr>
+<h3 id="9-index-multicolonne"><strong>9. Index multicolonne</strong></h3>
+<p>Les index peuvent inclure plusieurs colonnes :</p>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX <span class="hljs-keyword">ON</span> ma_table (id, name);
 </code></pre>
-<p><strong>L’ordre des colonnes est important.</strong><br>
-L’accès direct est optimisé uniquement sur les <strong>premières colonnes</strong>.</p>
-<p><strong>Exemple :</strong></p>
-<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t1 (c1 <span class="hljs-type">int</span>, c2 <span class="hljs-type">int</span>, c3 <span class="hljs-type">int</span>, c4 text);
-<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t1 (c1, c2, c3, c4)
-<span class="hljs-keyword">SELECT</span> i<span class="hljs-operator">*</span><span class="hljs-number">10</span>, j<span class="hljs-operator">*</span><span class="hljs-number">5</span>, k<span class="hljs-operator">*</span><span class="hljs-number">20</span>, <span class="hljs-string">&#x27;text&#x27;</span><span class="hljs-operator">||</span>i<span class="hljs-operator">||</span>j<span class="hljs-operator">||</span>k
-<span class="hljs-keyword">FROM</span> generate_series(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>) i
-<span class="hljs-keyword">CROSS</span> <span class="hljs-keyword">JOIN</span> generate_series(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>) j
-<span class="hljs-keyword">CROSS</span> <span class="hljs-keyword">JOIN</span> generate_series(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>) k;
-
-<span class="hljs-keyword">CREATE</span> INDEX <span class="hljs-keyword">ON</span> t1 (c1, c2, c3);
-VACUUM ANALYZE t1;
-</code></pre>
-<h2 id="types-de-scans-utilisant-un-index">Types de scans utilisant un index</h2>
+<p><strong>L'ordre des colonnes est important.</strong></p>
+<hr>
+<h3 id="10-types-de-scans-utilisant-un-index"><strong>10. Types de scans utilisant un index</strong></h3>
 <ul>
 <li><strong>Index Scan</strong></li>
 <li><strong>Bitmap Index Scan</strong></li>
-<li><strong>Index Only Scan</strong> (très performant)</li>
-<li>Versions parallélisées disponibles</li>
+<li><strong>Index Only Scan</strong> (plus rapide)</li>
 </ul>
-<h2 id="index-fonctionnels">Index fonctionnels</h2>
-<p>Un index classique ne sera pas utilisé si une fonction est appliquée à la colonne dans la clause WHERE :</p>
-<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> ma_table <span class="hljs-keyword">WHERE</span> <span class="hljs-built_in">upper</span>(a) <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;DUPOND&#x27;</span>;
-</code></pre>
-<p><strong>Solution :</strong> Créer un index fonctionnel :</p>
+<hr>
+<h3 id="11-index-fonctionnels"><strong>11. Index fonctionnels</strong></h3>
+<p>Si une fonction est appliquée à une colonne, créez un index fonctionnel :</p>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX mon_idx <span class="hljs-keyword">ON</span> ma_table (<span class="hljs-built_in">upper</span>(a));
 </code></pre>
-<h2 id="index-couvrants">Index couvrants</h2>
-<p>Les index couvrants optimisent les <strong>Index Only Scans</strong> en incluant des colonnes supplémentaires :</p>
+<hr>
+<h3 id="12-index-couvrants"><strong>12. Index couvrants</strong></h3>
+<p>Un index couvrant inclut des colonnes supplémentaires pour optimiser les scans :</p>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> INDEX clients_idx1
 <span class="hljs-keyword">ON</span> clients (id_client) INCLUDE (nom_client);
 </code></pre>
-<p>Cet index permet d’exécuter efficacement la requête suivante :</p>
-<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> id_client, nom_client <span class="hljs-keyword">FROM</span> clients <span class="hljs-keyword">WHERE</span> id_client <span class="hljs-operator">&gt;</span> <span class="hljs-number">100</span>;
-</code></pre>
-<h2 id="classes-dopérateurs">Classes d’opérateurs</h2>
-<p>Les index s’appuient sur des classes d’opérateurs adaptées :</p>
-<pre><code class="language-sql"><span class="hljs-keyword">WHERE</span> col_varchar <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;chaine%&#x27;</span>
-</code></pre>
-<p>Un index standard ne sera pas utilisé. Il faut créer un index spécifique :</p>
+<hr>
+<h3 id="13-classes-dopérateurs"><strong>13. Classes d’opérateurs</strong></h3>
+<p>Les index utilisent des classes spécifiques d'opérateurs, par exemple pour optimiser la recherche textuelle :</p>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX idx1
 <span class="hljs-keyword">ON</span> ma_table (col_varchar varchar_pattern_ops);
 </code></pre>
-<p>Cela permet d’optimiser les recherches textuelles sans dépendre des règles de collation.</p>
 
             
             

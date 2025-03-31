@@ -2,7 +2,7 @@
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>Cours Bases de Donn&eacute;es - 2&#x1d4d;&#x1d40;&#x1d39; Ann&eacute;e IUT</title>
+            <title>&ast;&ast;Vues et Index&ast;&ast;</title>
             <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -138,88 +138,100 @@
         
         </head>
         <body class="vscode-body vscode-light">
-            <p>##Les Vues : Définition et Intérêt##Voici votre document converti en Markdown avec du style pour une meilleure lisibilité :</p>
-<h1 id="cours-bases-de-données---2ᵍᵀᴹ-année-iut">Cours Bases de Données - 2ᵍᵀᴹ Année IUT</h1>
-<h2 id="cours-1--vues-et-index">Cours 1 : Vues et Index</h2>
-<h2 id="définition">Définition</h2>
-<p>Une <strong>vue</strong> est une table virtuelle, résultat d’une requête à laquelle on a donné un <strong>nom</strong>.</p>
-<h3 id="pourquoi-utiliser-une-vue-">Pourquoi utiliser une Vue ?</h3>
-<p><strong>Simplifie</strong> des requêtes complexes<br>
-<strong>Améliore</strong> la confidentialité des données<br>
-<strong>Garantit</strong> l’intégrité d’une base</p>
-<hr>
-<h2 id="création-dune-vue">Création d’une Vue</h2>
+            <h1 id="vues-et-index"><strong>Vues et Index</strong></h1>
+<h2 id="définition"><strong>Définition</strong></h2>
+<p>Une <strong>vue</strong> est une table virtuelle issue du résultat d’une requête, qui est stockée sous un <strong>nom spécifique</strong>. Elle permet de simplifier des requêtes complexes, d’améliorer la confidentialité des données et de garantir l’intégrité d’une base de données.</p>
+<h2 id="pourquoi-utiliser-une-vue-"><strong>Pourquoi utiliser une Vue ?</strong></h2>
+<p><strong>Simplifier</strong> des requêtes complexes et améliorer la lisibilité du code SQL</p>
+<p><strong>Restreindre</strong> l’accès aux données sensibles en affichant uniquement les colonnes nécessaires</p>
+<p><strong>Faciliter</strong> la maintenance des requêtes SQL en centralisant la logique</p>
+<p><strong>Optimiser</strong> l’accès aux données dans certaines situations</p>
+<h2 id="création-dune-vue"><strong>Création d’une Vue</strong></h2>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> [<span class="hljs-keyword">OR</span> REPLACE] [FORCE <span class="hljs-operator">|</span> NOFORCE] <span class="hljs-keyword">VIEW</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span> [(<span class="hljs-operator">&lt;</span>liste_attributs<span class="hljs-operator">&gt;</span>)]
 <span class="hljs-keyword">AS</span> <span class="hljs-operator">&lt;</span>clause_select<span class="hljs-operator">&gt;</span>
 [<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">CHECK</span> OPTION [<span class="hljs-keyword">CONSTRAINT</span> <span class="hljs-operator">&lt;</span>nom_de_contrainte<span class="hljs-operator">&gt;</span>]]
 [<span class="hljs-keyword">WITH</span> READ <span class="hljs-keyword">ONLY</span>];
-
-###  Utilisation
-
-```<span class="hljs-keyword">sql</span>
-<span class="hljs-keyword">SELECT</span> ... <span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">WHERE</span> ...
 </code></pre>
-<p><strong>Remarque :</strong> Une vue peut être utilisée dans <code>SELECT, UPDATE, DELETE, INSERT, GRANT</code>.</p>
-<h3 id="exemple">Exemple</h3>
+<h3 id="utilisation-dune-vue"><strong>Utilisation d’une Vue</strong></h3>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">WHERE</span> ...;
+</code></pre>
+<p><strong>Remarque :</strong> Une vue peut être utilisée dans <code>SELECT, UPDATE, DELETE, INSERT, GRANT</code>, sous certaines conditions.</p>
+<hr>
+<h2 id="exemples-de-vues"><strong>Exemples de Vues</strong></h2>
+<h3 id="vue-pour-filtrer-des-données-spécifiques"><strong>Vue pour filtrer des données spécifiques</strong></h3>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> CritiquesLeMonde <span class="hljs-keyword">AS</span>
-<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Critique <span class="hljs-keyword">WHERE</span> Source<span class="hljs-operator">=</span><span class="hljs-string">&#x27;Le Monde&#x27;</span>;
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Critique <span class="hljs-keyword">WHERE</span> Source <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Le Monde&#x27;</span>;
 </code></pre>
-<h3 id="suppression-et-renommage">Suppression et Renommage</h3>
-<pre><code class="language-sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">VIEW</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span>;
-RENAME <span class="hljs-operator">&lt;</span>ancien_nom_de_vue<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>nouveau_nom_de_vue<span class="hljs-operator">&gt;</span>;
+<hr>
+<h3 id="vue-pour-simplifier-une-requête-complexe"><strong>Vue pour simplifier une requête complexe</strong></h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> FilmCritique (NumFilm, Titre, NomRealisateur, NomCritique, Note) <span class="hljs-keyword">AS</span>
+<span class="hljs-keyword">SELECT</span> F.NumFilm, F.Titre, I1.NomIndividu <span class="hljs-keyword">AS</span> Realisateur, I2.NomIndividu <span class="hljs-keyword">AS</span> Critique, C.Note
+<span class="hljs-keyword">FROM</span> Film F
+<span class="hljs-keyword">JOIN</span> Individu I1 <span class="hljs-keyword">ON</span> F.NumRealisateur <span class="hljs-operator">=</span> I1.NumIndividu
+<span class="hljs-keyword">JOIN</span> Critique C <span class="hljs-keyword">ON</span> C.NumFilm <span class="hljs-operator">=</span> F.NumFilm
+<span class="hljs-keyword">JOIN</span> Individu I2 <span class="hljs-keyword">ON</span> C.NumIndividu <span class="hljs-operator">=</span> I2.NumIndividu;
 </code></pre>
-<p><strong>Remarque :</strong> Supprimer une vue ne supprime pas les données.</p>
-<h3 id="exemple--vue-pour-simplifier-une-requête-complexe">Exemple : Vue pour simplifier une requête complexe</h3>
-<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> FilmCritique (NumFilm, Titre, NomReal, NomCrit, Note) <span class="hljs-keyword">AS</span>
-<span class="hljs-keyword">SELECT</span> F.NumFilm, Titre, I1.NomIndividu, I2.NomIndividu, Note
-<span class="hljs-keyword">FROM</span> Film F, Individu I1, Individu I2, Critique C
-<span class="hljs-keyword">WHERE</span> C.NumFilm <span class="hljs-operator">=</span> F.NumFilm
-<span class="hljs-keyword">AND</span> C.NumIndividu <span class="hljs-operator">=</span> I2.NumIndividu
-<span class="hljs-keyword">AND</span> F.NumRealisateur <span class="hljs-operator">=</span> I1.NumIndividu;
-</code></pre>
-<h3 id="vue-pour-assurer-la-confidentialité">Vue pour assurer la confidentialité</h3>
+<hr>
+<h3 id="vue-pour-restreindre-laccès-aux-données-sensibles"><strong>Vue pour restreindre l’accès aux données sensibles</strong></h3>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> IndividuPublic <span class="hljs-keyword">AS</span>
 <span class="hljs-keyword">SELECT</span> NumIndividu, NomIndividu, PrenomIndividu
-<span class="hljs-keyword">FROM</span> INDIVIDU;
+<span class="hljs-keyword">FROM</span> Individu;
 </code></pre>
-<h3 id="vue-pour-assurer-lintégrité">Vue pour assurer l’intégrité</h3>
+<hr>
+<h3 id="vue-pour-assurer-lintégrité-des-données"><strong>Vue pour assurer l’intégrité des données</strong></h3>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> CritiqueSansAvis <span class="hljs-keyword">AS</span>
 <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Critique
 <span class="hljs-keyword">WHERE</span> Texte <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;
 </code></pre>
-<p>➡️ <strong>Mise à jour</strong> :</p>
+<h4 id="mise-à-jour-à-travers-la-vue"><strong>Mise à jour à travers la Vue</strong></h4>
 <pre><code class="language-sql"><span class="hljs-keyword">UPDATE</span> CritiqueSansAvis
 <span class="hljs-keyword">SET</span> Texte <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Sans intérêt&#x27;</span>
 <span class="hljs-keyword">WHERE</span> Note <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
 </code></pre>
 <hr>
-<h2 id="index--généralités">Index : Généralités</h2>
-<h3 id="pourquoi-utiliser-un-index-">Pourquoi utiliser un index ?</h3>
-<p><strong>Optimise</strong> l’accès aux données<br>
-<strong>Assure</strong> l’unicité (clé primaire, contraintes explicites)</p>
-<h3 id="création-dun-index">Création d’un Index</h3>
+<h2 id="suppression-et-renommage-dune-vue"><strong>Suppression et Renommage d’une Vue</strong></h2>
+<pre><code class="language-sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">VIEW</span> <span class="hljs-operator">&lt;</span>nom_de_vue<span class="hljs-operator">&gt;</span>;
+RENAME <span class="hljs-operator">&lt;</span>ancien_nom_de_vue<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>nouveau_nom_de_vue<span class="hljs-operator">&gt;</span>;
+</code></pre>
+<hr>
+<h1 id="les-index-en-sql"><strong>Les Index en SQL</strong></h1>
+<h2 id="pourquoi-utiliser-un-index-"><strong>Pourquoi utiliser un index ?</strong></h2>
+<p><strong>Accélère</strong> les performances des requêtes sur de grandes tables<br>
+<strong>Améliore</strong> l’efficacité des recherches avec <code>WHERE</code>, <code>ORDER BY</code>, et <code>JOIN</code><br>
+<strong>Assure</strong> l’unicité des enregistrements (exemple : clé primaire)</p>
+<hr>
+<h2 id="création-dun-index"><strong>Création d’un Index</strong></h2>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> [<span class="hljs-keyword">UNIQUE</span> <span class="hljs-operator">|</span> BITMAP] INDEX [<span class="hljs-operator">&lt;</span>schema<span class="hljs-operator">&gt;</span>.]<span class="hljs-operator">&lt;</span>nom_index<span class="hljs-operator">&gt;</span>
 <span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>nom_de_table<span class="hljs-operator">&gt;</span> (<span class="hljs-operator">&lt;</span>nom_de_colonne<span class="hljs-operator">&gt;</span> [<span class="hljs-keyword">ASC</span> <span class="hljs-operator">|</span> <span class="hljs-keyword">DESC</span>], ...);
 </code></pre>
-<p><strong>Exemple</strong> :</p>
+<h3 id="exemple--index-classique-pour-accélérer-les-recherches"><strong>Exemple : Index classique pour accélérer les recherches</strong></h3>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX IndNomIndividu
-<span class="hljs-keyword">ON</span> Individu(nomIndividu);
+<span class="hljs-keyword">ON</span> Individu(NomIndividu);
 </code></pre>
-<h3 id="organisation-des-index">Organisation des Index</h3>
-<h4 id="types-dindex-dans-oracle-">Types d’index dans Oracle :</h4>
+<hr>
+<h3 id="index-pour-optimiser-les-recherches-par-clé-étrangère"><strong>Index pour optimiser les recherches par clé étrangère</strong></h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX IndCritiqueFilm
+<span class="hljs-keyword">ON</span> Critique(NumFilm);
+</code></pre>
+<hr>
+<h3 id="index-unique-pour-assurer-lunicité-dune-colonne"><strong>Index Unique pour assurer l’unicité d’une colonne</strong></h3>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> INDEX IndNumIndividu
+<span class="hljs-keyword">ON</span> Individu(NumIndividu);
+</code></pre>
+<hr>
+<h2 id="types-dindex-dans-oracle"><strong>Types d’Index dans Oracle</strong></h2>
 <ul>
-<li><strong>B-arbre</strong> : Toutes les branches ont la même longueur.</li>
-<li><strong>Bitmap</strong> : Utile si peu de valeurs distinctes.</li>
+<li><strong>B-tree (B-arbre)</strong> : Arbre équilibré où chaque branche a la même profondeur</li>
+<li><strong>Bitmap</strong> : Utilisé pour les colonnes avec peu de valeurs distinctes</li>
 </ul>
-<p><strong>Exemple d’index en B-arbre</strong> :</p>
+<h3 id="exemple-dindex-en-b-arbre"><strong>Exemple d’Index en B-arbre</strong></h3>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> INDEX IndFilmTitre <span class="hljs-keyword">ON</span> Film(Titre);
 </code></pre>
-<p><strong>Exemple d’index en Bitmap</strong> :</p>
+<hr>
+<h3 id="exemple-dindex-en-bitmap"><strong>Exemple d’Index en Bitmap</strong></h3>
 <pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> BITMAP INDEX IndClasse <span class="hljs-keyword">ON</span> Eleve(numClasse);
 </code></pre>
 <hr>
-<p><strong>Résumé</strong><br>
-Ce cours présente les <strong>vues</strong> et <strong>index</strong> en bases de données, leurs <strong>bénéfices</strong>, <strong>syntaxe</strong>, et des <strong>exemples concrets</strong> en</p>
 
             
             
